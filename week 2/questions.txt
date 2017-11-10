@@ -1,0 +1,42 @@
+Explain the difference between the == operator and the === operator.
+    By using == you check if something is equal to something else. This is not strict
+
+    x == 1 //is x equal to 1? (False)
+    x == 2 //is x equal to 2? (True)
+    true == 1 //does the boolean value of true equal 1? (True)
+    By using === you check if something is equal to something else. This is also strict.
+
+    x === 1 //is x equal to 1? (False)
+    x === 2 //is x equal to 2? (True)
+    true === 1 //does the boolean value of true equal 1? (False)
+    (https://www.codecademy.com/en/forum_questions/558ea4f5e39efed371000508)
+
+Explain what a closure is. (Note that JavaScript programs use closures very often.)
+    A closure is an inner function that has access to the outer (enclosing) function’s variables—scope chain.
+    The closure has three scope chains: it has access to its own scope (variables defined between its curly brackets),
+    it has access to the outer function’s variables, and it has access to the global variables.
+
+    The inner function has access not only to the outer function’s variables, but also to the outer function’s parameters.
+    Note that the inner function cannot call the outer function’s arguments object, however,
+    even though it can call the outer function’s parameters directly.
+
+    You create a closure by adding a function inside another function.
+    (http://javascriptissexy.com/understand-javascript-closures-with-ease/)
+
+Explain what higher order functions are.
+    a higher-order function is a function that does at least one of the following:
+
+    takes one or more functions as arguments (i.e., procedural parameters),
+    returns a function as its result.
+    (https://en.wikipedia.org/wiki/Higher-order_function)
+
+Explain what a query selector is and give an example line of JavaScript that uses a query selector.
+    The querySelector() method returns the first element that matches a specified CSS selector(s) in the document.
+
+    Note: The querySelector() method only returns the first element that matches the specified selectors.
+    To return all the matches, use the querySelectorAll() method instead.
+
+    If the selector matches an ID in document that is used several times
+    (Note that an "id" should be unique within a page and should not be used more than once),
+    it returns the first matching element.
+    (https://www.w3schools.com/jsref/met_document_queryselector.asp)
