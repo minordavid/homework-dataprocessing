@@ -40,3 +40,9 @@ Explain what a query selector is and give an example line of JavaScript that use
     (Note that an "id" should be unique within a page and should not be used more than once),
     it returns the first matching element.
     (https://www.w3schools.com/jsref/met_document_queryselector.asp)
+
+    example:
+
+    Get the first <p> element in the document:
+    document.querySelector("p");
+    (https://www.w3schools.com/jsref/met_document_queryselector.asp)
