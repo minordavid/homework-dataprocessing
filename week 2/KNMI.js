@@ -1,5 +1,6 @@
-// David Vesseur 10901272
+// David Vesseur 10901272 Linegraph with javascript
 // this program makes a 2D graph based on the data given in a html file
+// http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi
 
 // make arrays
 var date = [];
@@ -10,11 +11,12 @@ var months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep",
 
 // make variables
 var days = 365;
+var amountmonths = 12;
 var mintemp = null;
 var maxtemp = null;
 
 // set the placements of the graph
-setHiPixel = [20, 120];
+setHiPixel = [20, 200];
 setWiPixel = [100, 400];
 
 
@@ -55,8 +57,11 @@ function drawGraph(hightPixel, withPixel){
     var datetrans = createTransform(minmaxdate,withPixel);
     var temptrans = createTransform(minmaxtemp,hightPixel);
 
-    // define canvas and ctx
+    // define canvas and ctx and make with and hight the given pixels,
+    // add a little for title and axis discriptions
     var canvas = document.getElementById('canvas');
+    canvas.width  = withPixel[1] + 120;
+    canvas.height = hightPixel[1] + 20;
     var ctx = canvas.getContext('2d');
 
     // draw the graph line with all data points
