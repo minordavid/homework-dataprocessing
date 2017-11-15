@@ -77,6 +77,7 @@ window.onload = function(){
           .attr("y", 5)
           .attr("dy", ".71em")
           .style("text-anchor", "end")
+          .style("font-size", "12px")
           .text("Liter / inwoner");
 
 
@@ -91,5 +92,12 @@ window.onload = function(){
           .attr("height", function(d) { return height - y(d.Liter);})
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide);
+
+      svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .text("gedronken pils per inwoner per land in de EU (in liters)");
     });
 };
