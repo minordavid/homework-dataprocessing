@@ -1,5 +1,5 @@
 // d3 tip from "http://bl.ocks.org/Caged/6476579"
-// make bar from "http://bl.ocks.org/Jverma/887877fc5c2c2d99be10"
+// make bar from "https://bost.ocks.org/mike/bar/3/" and "http://bl.ocks.org/Jverma/887877fc5c2c2d99be10"
 
 
 window.onload = function(){
@@ -28,7 +28,7 @@ window.onload = function(){
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-        return "<strong>Liter:</strong> <span style='color:red'>" + d.Liter + "</span>";
+        return "<strong>Liter:</strong> <span style='color:blue'>" + d.Liter + "</span>";
       });
 
 
@@ -53,6 +53,7 @@ window.onload = function(){
       // scale the range of the data
       x.domain(data.map(function(d) { return d.Country; }));
       y.domain([0, d3.max(data, function(d) { return d.Liter; })]);
+
 
       // add axis
       svg.append("g")
