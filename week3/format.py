@@ -2,10 +2,12 @@ import csv
 import json
 
 csvfile = open('Data.csv', 'r')
-jsonfile = open('file.json', 'w')
+jsonfile = open('Beer.json', 'w')
 
-fieldnames = ("Day","Rain")
+fieldnames = ("Country","Liter")
 reader = csv.DictReader( csvfile, fieldnames)
+data = []
 for row in reader:
-    json.dump(row, jsonfile)
-    jsonfile.write('\n')
+    data.append(row)
+json.dump(data, jsonfile)
+jsonfile.write('\n')
