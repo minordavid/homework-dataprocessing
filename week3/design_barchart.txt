@@ -1,0 +1,10 @@
+ik gebruik een txt i.p.v. een pdf omdat pdf niet ondersteunt wordt in IDE (laptop is stuk dus ik werk in IDE)
+
+<> ik heb er voor gekozen om mijn bar rood te maken omdat dit kleur toevoegd aan de tabel, maar wel een "normale" kleur is.
+<> bij als de muis op een bar komt dan veranderd deze in blauw, aangezien dit verschil goed te zien is.
+<> de tip die ik gebruik is zonder een vlak, hier heb ik voor gekozen omdat ik het mooier vind als er alleen een text te zien is met een verwijzing
+   naar de text (een driehoekje) ook heb ik de text zwart gelaten omdat dit eenvoudig en duidelijk is
+<> de x as heb ik geen benaming gegeven omdat land namen voor zichzelf spreken, de y as heb ik wel een naam gegeven voor de duidelijkheid met
+   ticks van 15 zodat er om de 10 een getal met aanwijzing komt
+<> de tabel is 700x400 omdat ik dit een mooie groote vond. alles is duidelijk te zien, maar het is niet extreem groot
+<> de landen op de y as zijn een beetje gedraait om het makkelijker leesbaar te maken

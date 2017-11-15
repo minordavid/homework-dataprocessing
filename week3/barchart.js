@@ -22,13 +22,14 @@ window.onload = function(){
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
-        .ticks(10);
+        .ticks(15);
 
+    // define the tip
     var tip = d3.tip()
       .attr('class', 'd3-tip')
       .offset([-10, 0])
       .html(function(d) {
-        return "<strong>Liter:</strong> <span style='color:blue'>" + d.Liter + "</span>";
+        return "<strong>Liter:</strong> <span style='color:black'>" + d.Liter + "</span>";
       });
 
 
@@ -40,6 +41,7 @@ window.onload = function(){
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
 
+    // call tip
     svg.call(tip);
 
     // load the data
@@ -64,7 +66,7 @@ window.onload = function(){
           .style("text-anchor", "end")
           .attr("dx", "-.8em")
           .attr("dy", "-.55em")
-          .attr("transform", "rotate(-90)" );
+          .attr("transform", "rotate(-60)" );
 
     // make the y as
       svg.append("g")
