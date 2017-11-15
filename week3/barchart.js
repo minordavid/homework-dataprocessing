@@ -98,6 +98,6 @@ window.onload = function(){
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
         .style("font-size", "20px")
-        .text("gedronken pils per inwoner per land in de EU (in liters)");
+        .text("gedronken bier per inwoner per land in de EU (in liters)");
     });
 };
