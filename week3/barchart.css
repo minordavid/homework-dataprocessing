@@ -21,7 +21,7 @@ body {
 .x.axis path {
   display: none;
 }
-
+/*add a tip to represent data*/
 .d3-tip {
   line-height: 1;
   font-weight: bold;

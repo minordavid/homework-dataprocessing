@@ -1,3 +1,5 @@
+// david vesseur 10901272
+// d3 is used to make a interactive barchart
 // d3 tip from "http://bl.ocks.org/Caged/6476579"
 // make bar from "https://bost.ocks.org/mike/bar/3/" and "http://bl.ocks.org/Jverma/887877fc5c2c2d99be10"
 
@@ -13,12 +15,12 @@ window.onload = function(){
 
     var y = d3.scale.linear().range([height, 0]);
 
-    // define the axis
+    // define the x axis
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom");
 
-
+    // define the y axis
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
@@ -93,6 +95,7 @@ window.onload = function(){
           .on('mouseover', tip.show)
           .on('mouseout', tip.hide);
 
+      // add a title
       svg.append("text")
         .attr("x", (width / 2))
         .attr("y", 0 - (margin.top / 2))
