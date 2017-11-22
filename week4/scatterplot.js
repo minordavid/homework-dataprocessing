@@ -1,7 +1,9 @@
+// David vesseur 10901272
+
 window.onload = function(){
 
     //create size of the table and give margins
-    var margin = { top: 30, right: 50, bottom: 40, left: 50 };
+    var margin = { top: 50, right: 100, bottom: 40, left: 50 };
     var width = 960 - margin.left - margin.right;
     var height = 500 - margin.top - margin.bottom;
 
@@ -13,9 +15,8 @@ window.onload = function(){
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // give the domain and range for x axis
+    // give the range for x axis
     var xscale = d3.scaleLinear()
-      .domain([0,10])
       .range([0,width]);
 
     // give range for y axis
@@ -36,7 +37,7 @@ window.onload = function(){
       .tickSize(-width)
       .scale(yscale);
 
-    // TODO
+    // set the d3.scaleCategory20 as a variable
     var color = d3.scaleCategory20();
 
     // load data of csv
@@ -52,10 +53,17 @@ window.onload = function(){
 
       data.sort(function(a,b) { return b.r - a.r; });
 
+      // transform the x axis range
+      xscale.domain(d3.extent(data, function(d) {
+        return d.x;
+      })).nice();
+
+      // transform the y axis range
       yscale.domain(d3.extent(data, function(d) {
         return d.y;
       })).nice();
 
+      // transform the radius
       radius.domain(d3.extent(data, function(d) {
         return d.r;
       })).nice();
@@ -82,7 +90,7 @@ window.onload = function(){
         .append("circle")
         .attr("r", function(d) { return radius(d.r);  })
         .style("fill", function(d) {
-          return color(d["team86"]);
+          return color(d["land"]);
         })
 
       group
@@ -90,21 +98,37 @@ window.onload = function(){
         .attr("x", function(d) { return radius(d.r); })
         .attr("alignment-baseline", "middle")
         .text(function(d) {
-          return d["land"];
+          return d["land"] + ": " + d["happiness"];
         });
 
-      svg.append("text")
-        .attr("x", 6)
-        .attr("y", -2)
-        .attr("class", "label")
-        .text("bier in liters per inwoner");
 
+        // add label to y axis
       svg.append("text")
-        .attr("x", width-2)
-        .attr("y", height-6)
+        .attr("y", -40)
+        .attr("transform", "rotate(-90)")
+
+
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .style("font-size", "12px")
+        .text("Liter bier per inwoner");
+
+
+        // add label to x axis
+      svg.append("text")
+        .attr("x", width)
+        .attr("y", height + 30)
         .attr("text-anchor", "end")
         .attr("class", "label")
-        .text("prijs");
+        .text("prijs per biertje (euro)");
+
+        // add title
+      svg.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .text("prijs per bier t.o.v. gedronken bier per inwoner en het geluk(schaal 1 - 10)");
 
       var legend = svg.selectAll(".legend")
           .data(color.domain())
@@ -112,12 +136,14 @@ window.onload = function(){
           .attr("class", "legend")
           .attr("transform", function(d, i) { return "translate(2," + i * 14 + ")"; });
 
+        // make the squere representing the color
       legend.append("rect")
           .attr("x", width)
           .attr("width", 12)
           .attr("height", 12)
           .style("fill", color);
 
+        // add the names of the countries to the legend next to the color
       legend.append("text")
           .attr("x", width + 16)
           .attr("y", 6)
@@ -132,7 +158,7 @@ window.onload = function(){
             .style("opacity", 1);
           d3.selectAll(".bubble")
             .style("opacity", 0.1)
-            .filter(function(d) { return d["team86"] == type; })
+            .filter(function(d) { return d["land"] == type; })
             .style("opacity", 1);
         })
         .on("mouseout", function(type) {

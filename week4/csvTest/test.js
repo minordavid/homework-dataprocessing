@@ -1,6 +1,7 @@
+// David vesseur 10901272
 
 colors =["#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#005824"];
-descriptions = ["0-10", "10-100", "100-1000", "1000-10000", "10000-100000", "100000-1000000"];
+descriptions = ["never", "going", "to", "give", "you", "up"];
 
 d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     if (error) throw error;

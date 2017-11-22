@@ -1,7 +1,12 @@
-"land","beer","cost","happiness", "color"
-"België",72,1.32,6.891,red
-"Bulgarije",74,1.1,4.217,blue
-"cyprus",51.4,2.44,5.546,red
-"Denemarken",64,1.66,7.526,red
-"Duitsland",107,0.74,6.951,blue
-
+land,beer,cost,happiness
+België,72,1.32,6.891
+Bulgarije,74,1.10,4.217
+cyprus,51.4,2.44,5.546
+Denemarken,64,1.66,7.526
+Duitsland,107,0.74,6.951
+Frankrijk,30,5.36,6.442
+Griekenland,35,3.38,5.227
+Hongarije,60,1.15,5.324
+Ierland,79,4.38,6.907
+Italië,29,4.53,5.964
+Tsjechië,144,0.86,6.609
