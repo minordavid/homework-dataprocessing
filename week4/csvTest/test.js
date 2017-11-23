@@ -1,4 +1,4 @@
-// David vesseur 10901272
+// David vesseur 10901272 
 
 colors =["#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#005824"];
 descriptions = ["never", "going", "to", "give", "you", "up"];
