@@ -1,4 +1,5 @@
 // David vesseur 10901272
+// java script used to make a scaterplot using three data points
 
 window.onload = function(){
 
@@ -37,11 +38,12 @@ window.onload = function(){
       .tickSize(-width)
       .scale(yscale);
 
-    // set the d3.scaleCategory20 as a variable
+    // set the d3.scaleCategory20 as a variable, this is used to give a nice diversity of colors
     var color = d3.scaleCategory20();
 
-    // load data of csv
+    // load data of csv and check for error
     d3.csv("Baseball.csv", function(error, data) {
+      if (error) throw error;
       console.log(data);
 
       // data pre-processing
@@ -68,16 +70,19 @@ window.onload = function(){
         return d.r;
       })).nice();
 
+      // append group and make xaxis
       svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .attr("class", "x axis")
         .call(xAxis);
 
+      // append group and make yaxis
       svg.append("g")
         .attr("transform", "translate(0,0)")
         .attr("class", "y axis")
         .call(yAxis);
 
+      // make the bubble
       var group = svg.selectAll("g.bubble")
         .data(data)
         .enter().append("g")
@@ -86,6 +91,7 @@ window.onload = function(){
           return "translate(" + xscale(d.x) + "," + yscale(d.y) + ")"
         });
 
+      // place the dots on the scatterplot with right color and size
       group
         .append("circle")
         .attr("r", function(d) { return radius(d.r);  })
@@ -93,25 +99,24 @@ window.onload = function(){
           return color(d["land"]);
         })
 
+      // show country and the happiness
       group
         .append("text")
         .attr("x", function(d) { return radius(d.r); })
         .attr("alignment-baseline", "middle")
         .text(function(d) {
-          return d["land"] + ": " + d["happiness"];
+          return d["land"] + ", geluk: " + d["happiness"];
         });
 
 
-        // add label to y axis
+    // add label to y axis
       svg.append("text")
         .attr("y", -40)
         .attr("transform", "rotate(-90)")
-
-
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .style("font-size", "12px")
-        .text("Liter bier per inwoner");
+        .text("Liter bier per inwoner (per jaar)");
 
 
         // add label to x axis
@@ -128,8 +133,9 @@ window.onload = function(){
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
         .style("font-size", "20px")
-        .text("prijs per bier t.o.v. gedronken bier per inwoner en het geluk(schaal 1 - 10)");
+        .text("geluk in een land ten opzichte van de prijs van bier en de gedronken hoeveelheid");
 
+      // create the legend
       var legend = svg.selectAll(".legend")
           .data(color.domain())
         .enter().append("g")
@@ -151,6 +157,7 @@ window.onload = function(){
           .style("text-anchor", "start")
           .text(function(d) { return d; });
 
+      // make the dots that don't match the country vade
       legend.on("mouseover", function(type) {
           d3.selectAll(".legend")
             .style("opacity", 0.1);
