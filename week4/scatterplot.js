@@ -105,7 +105,7 @@ window.onload = function(){
         .attr("x", function(d) { return radius(d.r); })
         .attr("alignment-baseline", "middle")
         .text(function(d) {
-          return d["land"] + ", geluk: " + d["happiness"];
+          return d["land"] + ", geluk: " + d["happiness"] + " / 10";
         });
 
 

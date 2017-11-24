@@ -3,7 +3,8 @@
 // toe te voegen omdat ik dit netter vind.
 
 // make variables
-name = ["kleur1", "kleur2", "kleur3", "kleur4", "kleur5", "kleur6"];
+idleft = ["kleur1", "kleur2", "kleur3", "kleur4", "kleur5", "kleur6"];
+idright = ["text1", "text2", "text3", "text4", "text5", "text6"]
 colors = ["#ccece6","#99d8c9","#66c2a4","#41ae76","#238b45","#005824"];
 descriptions = ["never", "going", "to", "give", "you", "up"];
 
@@ -16,9 +17,9 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
     for (i = 0; i < colors.length; i++){
 
         // create the left container with the colors
-        var svgContainer = d3.select("svg").append("svg");
+        var svgContainer = d3.select("svg");
         svgContainer.append("rect")
-        .attr("id", name[i])
+        .attr("id", idleft[i])
         .attr("x", 13)
         .attr("y", 13.5 + (43.4) * i)
         .attr("width", 21)
@@ -30,6 +31,7 @@ d3.xml("test.svg", "image/svg+xml", function(error, xml) {
         // create a group and append the right container
         var svgTContainer = d3.select("svg").append("g");
         svgTContainer.append("rect")
+        .attr("id", idright[i])
         .attr("x", 46.5)
         .attr("y", 13.5 + (43.4) * i)
         .attr("width", 119.1)
