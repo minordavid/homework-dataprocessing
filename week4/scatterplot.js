@@ -85,10 +85,12 @@ window.onload = function(){
       // make the bubble
       var group = svg.selectAll("g.bubble")
         .data(data)
-        .enter().append("g")
+        .enter().append("a")
+        .attr("xlink:href", "https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+        .append("g")
         .attr("class", "bubble")
         .attr("transform", function(d) {
-          return "translate(" + xscale(d.x) + "," + yscale(d.y) + ")"
+          return "translate(" + xscale(d.x) + "," + yscale(d.y) + ")";
         });
 
       // place the dots on the scatterplot with right color and size
@@ -97,7 +99,7 @@ window.onload = function(){
         .attr("r", function(d) { return radius(d.r);  })
         .style("fill", function(d) {
           return color(d["land"]);
-        })
+        });
 
       // show country and the happiness
       group
@@ -118,7 +120,6 @@ window.onload = function(){
         .style("font-size", "12px")
         .text("Liter bier per inwoner (per jaar)");
 
-
         // add label to x axis
       svg.append("text")
         .attr("x", width)
@@ -133,7 +134,7 @@ window.onload = function(){
         .attr("y", 0 - (margin.top / 2))
         .attr("text-anchor", "middle")
         .style("font-size", "20px")
-        .text("geluk in een land ten opzichte van de prijs van bier en de gedronken hoeveelheid");
+        .text("Geluk in een land ten opzichte van de prijs van bier en de gedronken hoeveelheid");
 
       // create the legend
       var legend = svg.selectAll(".legend")
