@@ -40,7 +40,7 @@ circle {
   pointer-events: none;
   font-size: 12px;
 }
-
+/**/
 .bubble:hover text {
   opacity: 1;
 }
@@ -48,6 +48,8 @@ circle {
 .bubble:hover circle {
   fill-opacity: 1;
 }
+
+/*set the name and source at right botom*/
 #name{
   position: fixed;
   bottom: 0;
