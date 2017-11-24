@@ -48,3 +48,8 @@ circle {
 .bubble:hover circle {
   fill-opacity: 1;
 }
+#name{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
