@@ -1,0 +1,5 @@
+i used a function to get the collors for the dots and legend, i used this function because it gives very different collors
+i scaled the y and x axis to the values of the csv
+tip is showed right of the dot in a simplistic way because this is very clear
+when hovering over a country the legend you see the dot representing this country.
+i chose not to do this the other way around because this has no added value, since the country is already showed in the tip
