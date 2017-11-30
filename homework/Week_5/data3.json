@@ -1,0 +1,86 @@
+[
+  {
+    "name": "< 15",
+    "show": true,
+    "color": "red",
+    "currentPopulation": 0,
+    "history": [
+      {
+        "year": 1995,
+        "population": 4
+      },
+      {
+        "year": 2000,
+        "population": 3
+      },
+      {
+        "year": 2005,
+        "population": 0
+      },
+      {
+        "year": 2010,
+        "population": 1
+      },
+      {
+        "year": 2015,
+        "population": 0
+      }
+    ]
+  },
+  {
+    "name": "15-20",
+    "show": true,
+    "color": "green",
+    "currentPopulation": 6,
+    "history": [
+      {
+        "year": 1995,
+        "population": 5
+      },
+      {
+        "year": 2000,
+        "population": 5
+      },
+      {
+        "year": 2005,
+        "population": 2
+      },
+      {
+        "year": 2010,
+        "population": 0
+      },
+      {
+        "year": 2015,
+        "population": 6
+      }
+    ]
+  },
+  {
+    "name": "20-30",
+    "show": true,
+    "color": "blue",
+    "currentPopulation": 3,
+    "history": [
+      {
+        "year": 1995,
+        "population": 13
+      },
+      {
+        "year": 2000,
+        "population": 7
+      },
+      {
+        "year": 2005,
+        "population": 4
+      },
+      {
+        "year": 2010,
+        "population": 3
+      },
+      {
+        "year": 2015,
+        "population": 3
+      }
+    ]
+  }
+]

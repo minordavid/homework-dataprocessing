@@ -31,53 +31,69 @@ window.onclick = function(event) {
 window.onload = function(){
 
   // load the initial data and draw the lines
-  let states, tipBox;
-      d3.json("state-populations.json", d => {
-
-        states = d;
-        drawfunction(states);
+  let catagory, tipBox;
+      d3.json("data1.json", function(error, d) {
+          if (error) throw error;
+          console.log(d);
+          catagory = d;
+          drawfunction(catagory);
       });
+
 
   // load the chosen data
   d3.selectAll(".m")
 		.on("click", function() {
 			var date = this.getAttribute("value");
 
+      // remove old text and lines
+      d3.selectAll("path#line").remove();
+      d3.selectAll("text#text").remove();
+
       // set the chosen data set al str
 			var str;
 			if(date == "1"){
-				str = "state-populations.json";
+				str = "data1.json";
 			}else if(date == "2"){
-				str = "state-populations2.json";
+				str = "data2.json";
+			}else if(date == "3"){
+				str = "data3.json";
 			}
 
       // Load the data and draw the lines
-      let states;
-      d3.json(str, d => {
-
-        states = d;
-        drawfunction(states);
+      let catagory;
+      d3.json(str, function(error, d) {
+          if (error) throw error;
+          console.log(d);
+          catagory = d;
+          drawfunction(catagory);
       });
 		});
 
   // Define the scales and tell D3 how to draw the line
-  var x = d3.scaleLinear().domain([1910, 2010]).range([0, width]);
-  var y = d3.scaleLinear().domain([0, 40000000]).range([height, 0]);
-  var line = d3.line().x(d => x(d.year)).y(d => y(d.population));
 
-  var chart = d3.select('svg').append('g')
+  // Define the scales and tell D3 how to draw the line
+  const x = d3.scaleLinear()
+    .domain([1995, 2015])
+    .range([0, width]);
+
+  const y = d3.scaleLinear()
+    .domain([0, 60])
+    .range([height, 0]);
+
+  const line = d3.line().x(d => x(d.year)).y(d => y(d.population));
+
+  const chart = d3.select('svg').append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  var tooltip = d3.select('#tooltip');
-  var tooltipLine = chart.append('line');
+  const tooltip = d3.select('#tooltip');
+  const tooltipLine = chart.append('line');
 
   // Add the axes and a title
-  var xAxis = d3.axisBottom(x).tickFormat(d3.format('.4'));
-  var yAxis = d3.axisLeft(y).tickFormat(d3.format('.2s'));
+  const xAxis = d3.axisBottom(x).tickFormat(d3.format('.4'));
+  const yAxis = d3.axisLeft(y).tickFormat(d3.format('.2s'));
   chart.append('g').call(yAxis);
   chart.append('g').attr('transform', 'translate(0,' + height + ')').call(xAxis);
-  chart.append('text').html('State Population Over Time').attr('x', 200);
-
+  chart.append('text').html('verkeersdoden per leeftijds catogorie per 5 jaar').attr('x', 200);
 
     function removeTooltip() {
       if (tooltip) tooltip.style('display', 'none');
@@ -85,9 +101,9 @@ window.onload = function(){
     }
 
     function drawTooltip() {
-      var year = Math.floor((x.invert(d3.mouse(tipBox.node())[0]) + 5) / 10) * 10;
+      var year = Math.floor((x.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
 
-      states.sort((a, b) => {
+      catagory.sort((a, b) => {
         return b.history.find(h => h.year == year).population - a.history.find(h => h.year == year).population;
       });
 
@@ -102,16 +118,17 @@ window.onload = function(){
         .style('left', d3.event.pageX + 20)
         .style('top', d3.event.pageY - 20)
         .selectAll()
-        .data(states).enter()
+        .data(catagory).enter()
         .append('div')
         .style('color', d => d.color)
         .html(d => d.name + ': ' + d.history.find(h => h.year == year).population);
     }
 
-    function drawfunction(states){
+    function drawfunction(catagory){
         chart.selectAll()
-          .data(states).enter()
+          .data(catagory).enter()
           .append('path')
+          .attr("id","line")
           .attr('fill', 'none')
           .attr('stroke', d => d.color)
           .attr('stroke-width', 2)
@@ -119,9 +136,10 @@ window.onload = function(){
           .attr('d', line);
 
         chart.selectAll()
-          .data(states).enter()
+          .data(catagory).enter()
           .append('text')
           .html(d => d.name)
+          .attr("id","text")
           .attr('fill', d => d.color)
           .attr('alignment-baseline', 'middle')
           .attr('x', width)
