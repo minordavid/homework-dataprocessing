@@ -30,11 +30,41 @@ window.onclick = function(event) {
 
 
 window.onload = function(){
+   // define the scales and tell D3 how to draw the line
+
+  const x = d3.scalePoint()
+    .domain([1995, 2000, 2005, 2010, 2015])
+    .range([0, width]);
+
+  const y = d3.scaleLinear()
+    .domain([0, 60])
+    .range([height, 0]);
+
+  // make linear scale const z to use for cross hair positioning
+  const z = d3.scaleLinear()
+    .domain([1995, 2015])
+    .range([0, width]);
+
+  const line = d3.line().x(d => x(d.year)).y(d => y(d.population));
+
+  const chart = d3.select('svg').append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+  // define tooltip
+  const tooltip = d3.select('#tooltip');
+  const tooltipLine = chart.append('line');
+
+  // add the axes and a title
+  const xAxis = d3.axisBottom(x).tickFormat(d3.format('.4'));
+  const yAxis = d3.axisLeft(y).tickFormat(d3.format('.2s'));
+  chart.append('g').call(yAxis);
+  chart.append('g').attr('transform', 'translate(0,' + height + ')').call(xAxis);
+  chart.append('text').html('verkeersdoden per leeftijds catogorie per 5 jaar').attr('x', 200);
 
   // load the initial data and draw the lines
   let catagory, tipBox;
       d3.json("data1.json", function(error, d) {
-          if (error) throw error;
+          if (error) alert ("no data");
           console.log(d);
           catagory = d;
           drawfunction(catagory);
@@ -63,72 +93,12 @@ window.onload = function(){
       // Load the data and draw the lines
       let catagory;
       d3.json(str, function(error, d) {
-          if (error) throw error;
+          if (error) alert("nodata");
           console.log(d);
           catagory = d;
           drawfunction(catagory);
       });
 		});
-
-  // define the scales and tell D3 how to draw the line
-  const x = d3.scaleLinear()
-    .domain([1995, 2015])
-    .range([0, width]);
-
-  const y = d3.scaleLinear()
-    .domain([0, 60])
-    .range([height, 0]);
-
-  const line = d3.line().x(d => x(d.year)).y(d => y(d.population));
-
-  const chart = d3.select('svg').append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-  // define tooltip
-  const tooltip = d3.select('#tooltip');
-  const tooltipLine = chart.append('line');
-
-  // add the axes and a title
-  const xAxis = d3.axisBottom(x).tickFormat(d3.format('.4'));
-  const yAxis = d3.axisLeft(y).tickFormat(d3.format('.2s'));
-  chart.append('g').call(yAxis);
-  chart.append('g').attr('transform', 'translate(0,' + height + ')').call(xAxis);
-  chart.append('text').html('verkeersdoden per leeftijds catogorie per 5 jaar').attr('x', 200);
-
-    // remove tooltip
-    function removeTooltip() {
-      if (tooltip) tooltip.style('display', 'none');
-      if (tooltipLine) tooltipLine.attr('stroke', 'none');
-    }
-
-    // draw tooltip
-    function drawTooltip() {
-      // calculate year
-      var year = Math.floor((x.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
-
-      // search for data
-      catagory.sort((a, b) => {
-        return b.history.find(h => h.year == year).population - a.history.find(h => h.year == year).population;
-      });
-
-      // define line
-      tooltipLine.attr('stroke', 'black')
-        .attr('x1', x(year))
-        .attr('x2', x(year))
-        .attr('y1', 0)
-        .attr('y2', height);
-
-      // display data
-      tooltip.html(year)
-        .style('display', 'block')
-        .style('left', d3.event.pageX + 20)
-        .style('top', d3.event.pageY - 20)
-        .selectAll()
-        .data(catagory).enter()
-        .append('div')
-        .style('color', d => d.color)
-        .html(d => d.name + ': ' + d.history.find(h => h.year == year).population);
-    }
 
     // draw graph
     function drawfunction(catagory){
@@ -162,5 +132,40 @@ window.onload = function(){
           .attr('opacity', 0)
           .on('mousemove', drawTooltip)
           .on('mouseout', removeTooltip);
+
+          // remove tooltip
+    function removeTooltip() {
+      if (tooltip) tooltip.style('display', 'none');
+      if (tooltipLine) tooltipLine.attr('stroke', 'none');
+    }
+
+     // draw tooltip
+    function drawTooltip() {
+      // calculate year
+      var year = Math.floor((z.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
+
+      // search for data
+      catagory.sort((a, catagory) => {
+        return catagory.history.find(h => h.year == year).population - a.history.find(h => h.year == year).population;
+      });
+
+      // define line
+      tooltipLine.attr('stroke', 'black')
+        .attr('x1', x(year))
+        .attr('x2', x(year))
+        .attr('y1', 0)
+        .attr('y2', height);
+
+      // display data
+      tooltip.html(year)
+        .style('display', 'block')
+        .style('left', d3.event.pageX + 20)
+        .style('top', d3.event.pageY - 20)
+        .selectAll()
+        .data(catagory).enter()
+        .append('div')
+        .style('color', d => d.color)
+        .html(d => d.name + ': ' + d.history.find(h => h.year == year).population);
+      }
     }
 };

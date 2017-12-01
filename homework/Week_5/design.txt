@@ -1,0 +1,8 @@
+() ik heb gekozen voor drie verschillende lijnen omdat dit het redelijk overzichtelijk houd, helaas kon ik steeds maar vijf data
+    punten per lijn inladen omdat mijn dataset niet meer informatie had
+() de lijnen heb ik groen blauw en rood gemaakt omdat dit duidelijk verschillende lijnen zijn
+() de cross hair blijft bij een jaar punt en verplaatst pas als het dichter bij een ander jaar set is omdat dit duidelijk is
+() ik heb er voor gekozen om alle data in een toolbox weer te geven omdat dit duidelijk is
+() x as gaat per vijf jaar omdat ik ook maar per vijf jaar data heb
+() dropdown is met een klik en niet hover omdat ik hover zelf altijd erg vervelend vind aangezien de dropdown verdwijnt als je perongeluk
+    van het menu af gaat
