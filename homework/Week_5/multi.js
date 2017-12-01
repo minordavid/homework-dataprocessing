@@ -1,18 +1,19 @@
 // David Vesseur 10901272
 //
 
-// Define margins, dimensions, and some line colors
+// define margins, dimensions, and some line colors
 var margin = {top: 40, right: 120, bottom: 30, left: 40};
 var width = 800 - margin.left - margin.right;
 var height = 400 - margin.top - margin.bottom;
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
+// When the user clicks on the button,
+// toggle between hiding and showing the dropdown content
+// https://www.w3schools.com/howto/howto_js_dropdown.asp
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
 
-// Close the dropdown menu if the user clicks outside of it
+// close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
 
@@ -69,9 +70,7 @@ window.onload = function(){
       });
 		});
 
-  // Define the scales and tell D3 how to draw the line
-
-  // Define the scales and tell D3 how to draw the line
+  // define the scales and tell D3 how to draw the line
   const x = d3.scaleLinear()
     .domain([1995, 2015])
     .range([0, width]);
@@ -85,34 +84,41 @@ window.onload = function(){
   const chart = d3.select('svg').append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+  // define tooltip
   const tooltip = d3.select('#tooltip');
   const tooltipLine = chart.append('line');
 
-  // Add the axes and a title
+  // add the axes and a title
   const xAxis = d3.axisBottom(x).tickFormat(d3.format('.4'));
   const yAxis = d3.axisLeft(y).tickFormat(d3.format('.2s'));
   chart.append('g').call(yAxis);
   chart.append('g').attr('transform', 'translate(0,' + height + ')').call(xAxis);
   chart.append('text').html('verkeersdoden per leeftijds catogorie per 5 jaar').attr('x', 200);
 
+    // remove tooltip
     function removeTooltip() {
       if (tooltip) tooltip.style('display', 'none');
       if (tooltipLine) tooltipLine.attr('stroke', 'none');
     }
 
+    // draw tooltip
     function drawTooltip() {
+      // calculate year
       var year = Math.floor((x.invert(d3.mouse(tipBox.node())[0]) + 2.5) / 5) * 5;
 
+      // search for data
       catagory.sort((a, b) => {
         return b.history.find(h => h.year == year).population - a.history.find(h => h.year == year).population;
       });
 
+      // define line
       tooltipLine.attr('stroke', 'black')
         .attr('x1', x(year))
         .attr('x2', x(year))
         .attr('y1', 0)
         .attr('y2', height);
 
+      // display data
       tooltip.html(year)
         .style('display', 'block')
         .style('left', d3.event.pageX + 20)
@@ -124,7 +130,9 @@ window.onload = function(){
         .html(d => d.name + ': ' + d.history.find(h => h.year == year).population);
     }
 
+    // draw graph
     function drawfunction(catagory){
+        // select data and draw line
         chart.selectAll()
           .data(catagory).enter()
           .append('path')
@@ -135,6 +143,7 @@ window.onload = function(){
           .datum(d => d.history)
           .attr('d', line);
 
+        // select data and make text
         chart.selectAll()
           .data(catagory).enter()
           .append('text')
@@ -146,6 +155,7 @@ window.onload = function(){
           .attr('dx', '.5em')
           .attr('y', d => y(d.currentPopulation));
 
+        // display tooltip and box
         tipBox = chart.append('rect')
           .attr('width', width)
           .attr('height', height)
