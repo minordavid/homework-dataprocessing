@@ -7,3 +7,5 @@
 - in de grafiek worden de lijnen met groen, rood en blauw weer gegeven, ik heb voor deze kleuren gekozen omdat ze een duidelijk verschil geven en de grafiek daardoor
   in 1 oogopslag te begrijpen is. dit vond ik belangrijker dan de "gevoelens" die de kleuren weergeven (bijv. rood is negatief)
 - de tooltip van de grafiek geeft alle gegevens weer en update automatisch, deze is staat onder de grafiek wanneer de muis over de grafiek heen gaat.
+- bij de map word de opacity lager bij on hover en bij een click nog lager. wanneer er nog een keer een hover over een geklikte heen gaat verandert de opacity alsof het een
+  on hover is
