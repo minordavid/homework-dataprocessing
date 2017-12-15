@@ -70,7 +70,7 @@ function awesome(){
     // select body
     var body = d3.select("body"),
       // use scale to make a nece color sceme based on the population
-      color = d3.scale.linear().domain([1, 3650222])
+      color = d3.scale.linear().domain([0, 4000000])
         .range([ d3.rgb('#00FF00'), d3.rgb("#004000")]);
       // fill with the apropriate color
       for (var i = 0; i < landen.length; i++) {
@@ -82,9 +82,29 @@ function awesome(){
     var colorScale = d3.scale.linear()
       .range([d3.rgb('#00FF00'), d3.rgb("#004000")]);
 
+    var svgLegend = d3.select(".map")
+    var text = svgLegend.append("text").html('bevolking:').attr('x', margin.left).attr("y", 115 + margin.top);
+    var text = svgLegend.append("text").html('0').attr('x', margin.left + 15).attr("y", 129 + margin.top)
+    var text = svgLegend.append("text").html('2.000.000').attr('x', margin.left + 15).attr("y", 149 + margin.top)
+    var text = svgLegend.append("text").html('4.000.000').attr('x', margin.left + 15).attr("y", 169 + margin.top)
+    var circle = svgLegend.append("circle")
+    .attr("cx", margin.left + 7 )
+    .attr("cy", 125 + margin.top)
+    .attr("r", 6)
+    .style("fill", "#00FF00");
+    var circle = svgLegend.append("circle")
+    .attr("cx", margin.left + 7 )
+    .attr("cy", 145 + margin.top)
+    .attr("r", 6)
+    .style("fill", "00A800");
+    var circle = svgLegend.append("circle")
+    .attr("cx", margin.left + 7 )
+    .attr("cy", 165 + margin.top)
+    .attr("r", 6)
+    .style("fill", "004000");
+    // select svg and execute mouse functions
     var svg = d3.select(".map")
 
-    // select svg and execute mouse functions
     svgContainer = svg.selectAll(".land")
     .on("mouseover", onHoverProv)
     .on("mouseout", outHoverProv)
@@ -103,7 +123,9 @@ function awesome(){
   }
 
   function onHoverProv() {
+
     // select the onhover object and change opacity and class
+
     d3.select(this).style("opacity", 0.7).attr("class", "hover")
   }
   function outHoverProv() {
