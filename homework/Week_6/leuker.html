@@ -5,8 +5,15 @@
 
 <html >
     <head>
-        <script src="https://d3js.org/d3.v3.min.js"></script>
-        <script src="test.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://d3js.org/d3.v3.min.js"></script>
+      <script src="http://d3js.org/queue.v1.min.js"></script>
+      <script src="test.js"></script>
+      <script src="queue.js"></script>
+      <script src="legend.js"></script>
     </head>
 </html>
 <style>
@@ -26,7 +33,44 @@ div.tooltip {
 }
 </style>
 <body>
-  <svg style="width:800; height:200;" class="chart">
-  </svg>
+  <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+  <li><a data-toggle="tab" href="#menu1">Design</a></li>
+  <li><a data-toggle="tab" href="#menu2">Verkeersdoden</a></li>
+  <li><a data-toggle="tab" href="#menu3">Deze is voor jou</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <h3>HOME</h3>
+    <li><a data-toggle="tab" href="#menu1">Design:</a>  </li>
+    <p>De keuzes die ik heb gemaakt voor mijn design</p>
+    <li><a data-toggle="tab" href="#menu2">Verkeersdoden</a></li>
+    <p>Hier staat een grafiek die het aantal verkeersdoden per leeftijdscatogorie weergeeft over de geselecteerde provintie</p>
+    <li><a data-toggle="tab" href="#menu3">Deze is voor jou</a></li>
+    <p>Die is voor jou</p>
+
+    <p>gemaakt door: David Vesseur</p>
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">bron</a>
+
+  </div>
+  <div id="menu1" class="tab-pane fade">
+    <h3>Design</h3>
+    <script src="disign.txt"></script>
+    <p>Some content in menu 1.</p>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+    <h3>verkeersdoden per 5 jaar per leeftijds catogorie</h3>
+    <svg style="width:800; height:200;" class="chart">
+    </svg>
+  </div>
+  <div id="menu3" class="tab-pane fade">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">ik ga je missen jan</a>
+  </div>
+</div>
+
+  <div id='tooltip' style='position:absolute;background-color:lightgray;padding:5px'></div>
+
   <div class="tooltip"></div>
+
 </body>
