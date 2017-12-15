@@ -1,5 +1,6 @@
 // david vesseur 10901272
 function awesome() {
+  
  // make variables to use
  var margin = {
   top: 40,
